@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  {% if mode == "admin" %}
+    <div class="tag admin">ADMIN</div>
+    <h1 class="h1">Panel de administrador</h1>
+  {% else %}
+    <div class="tag user">USER</div>
+    <h1 class="h1">Panel de usuario</h1>
+  {% endif %}
+
+  <p class="p">
+    Sesión activa para: <span class="mono">{{ email }}</span>
+  </p>
+
+  <div class="meta">
+    <div class="meta-item">
+      <div class="k">Roles</div>
+      <div class="v mono">{{ roles }}</div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <a class="btn ghost" href="/">Inicio</a>
+    <a class="btn danger" href="/logout">Logout</a>
+  </div>
+</section>
+{% endblock %}

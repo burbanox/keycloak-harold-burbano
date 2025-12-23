@@ -1,0 +1,58 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: kc_postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0
+    container_name: keycloak
+    depends_on:
+      - postgres
+    command: ["start-dev"]
+    environment:
+      KC_DB: ${KC_DB}
+      KC_DB_URL_HOST: ${KC_DB_URL_HOST}
+      KC_DB_URL_DATABASE: ${KC_DB_URL_DATABASE}
+      KC_DB_USERNAME: ${KC_DB_USERNAME}
+      KC_DB_PASSWORD: ${KC_DB_PASSWORD}
+
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+
+      KC_HTTP_PORT: 8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./keycloak_data:/opt/keycloak/data
+
+  fastapi:
+    build:
+      context: ./app
+    container_name: fastapi_app
+    depends_on:
+      - keycloak
+    environment:
+      KEYCLOAK_BROWSER_BASE: ${KEYCLOAK_BROWSER_BASE}
+
+      KEYCLOAK_BACKEND_BASE: ${KEYCLOAK_BACKEND_BASE}
+
+      KEYCLOAK_REALM: ${KEYCLOAK_REALM}
+
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID}
+      OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET}
+
+      APP_BASE: ${APP_BASE}
+
+      SESSION_SECRET: ${SESSION_SECRET}
+    ports:
+      - "8000:8000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

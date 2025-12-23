@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <h1 class="h1">Acceso sin rol</h1>
+  <p class="p">
+    Tu cuenta se autenticó, pero no tiene rol <span class="mono">user</span> ni <span class="mono">admin</span>.
+  </p>
+
+  {% if email %}
+    <div class="hint">
+      Usuario: <span class="mono">{{ email }}</span>
+    </div>
+  {% endif %}
+
+  <div class="actions">
+    <a class="btn ghost" href="/">Inicio</a>
+    <a class="btn danger" href="/logout">Logout</a>
+  </div>
+</section>
+{% endblock %}

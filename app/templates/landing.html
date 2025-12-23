@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <h1 class="h1">Iniciar sesión</h1>
+  <p class="p">
+    Autenticación con Keycloak (y Google si está configurado).
+  </p>
+
+  <div class="actions">
+    <a class="btn primary" href="/login">Login</a>
+  </div>
+
+  {% if user %}
+    <div class="hint">
+      Sesión detectada: <span class="mono">{{ email }}</span>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

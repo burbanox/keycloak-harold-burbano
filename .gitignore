@@ -1,0 +1,74 @@
+# =========================
+# Secrets / Env
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Docker / Compose
+# =========================
+docker-compose.override.yml
+
+# Volúmenes locales (persistencia)
+pg_data/
+keycloak_data/
+
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Build / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Testing / coverage
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+
+# Type checking
+.mypy_cache/
+.pyre/
+.pytype/
+.ruff_cache/
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+
+# =========================
+# OS / IDE
+# =========================
+.DS_Store
+Thumbs.db
+
+.vscode/
+.idea/
+*.iml
+
+# =========================
+# Local temp files
+# =========================
+*.swp
+*.swo
+*~

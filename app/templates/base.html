@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ title or "App" }}</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="bg"></div>
+
+  <main class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="dot"></div>
+        <div class="brand-text">
+          <div class="brand-title">FastAPI + Keycloak</div>
+          <div class="brand-sub">Realm: {{ realm or "—" }}</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        {% if user %}
+          <a class="link" href="/logout">Logout</a>
+        {% else %}
+          <a class="link" href="{{ keycloak_url or '#' }}" target="_blank" rel="noreferrer">Keycloak</a>
+        {% endif %}
+      </nav>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer class="footer">
+      Entorno local. UI simple para demo de roles.
+    </footer>
+  </main>
+</body>
+</html>
