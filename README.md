@@ -41,6 +41,8 @@ La infraestructura está orquestada con **Docker Compose**, incluyendo **Postgre
 ├── README.md                   # Documentación del proyecto
 └── .gitignore
 
+```
+
 # 🔐 Flujo de autenticación (OIDC)
 
 1. El usuario accede a `/login`
